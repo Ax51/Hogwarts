@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
+
+.login-page {
+    margin: 18% auto auto auto;
+
+    width: 500px;
+
+    background-color: rgba(12, 57, 88, 0.75);
+    border: 5px solid rgb(9, 27, 87);
+    border-radius: 25px;
+}
+
+.login-page--greet {
+    color: rgb(195, 56, 45);
+    text-align: center;
+}
+
+.login-page--enter {
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.login-page--enter input {
+    margin: 5px 0;
+
+    width: 200px;
+    height: 26px;
+    text-align: center;
+
+    color: rgb(117, 172, 255);
+    background-color: rgb(3, 35, 56);
+
+    border: 2px solid rgb(35, 71, 168);
+    border-radius: 0 12px 0 12px;
+    outline: none;
+}
+
+.login-page--enter input::placeholder {
+    color: rgba(190, 190, 190, 0.5);
+}
+
+.login-page--enter input:focus {
+    color: rgb(9, 27, 87);
+    background-color: rgb(93, 162, 207);
+}
+
+.login-page--enter input:focus::placeholder {
+    color: rgb(9, 27, 87);
+}
+
+.login-page--enter button {
+    margin-top: 10px;
+
+    width: 150px;
+    height: 22px;
+
+    color: rgb(117, 172, 255);
+    background-color: rgb(3, 35, 56);
+
+    border: 2px solid rgb(35, 71, 168);
+    border-radius: 0 10px 0 10px;
+}
+
+.login-page--enter button:active {
+    color: rgb(9, 27, 87);
+    background-color: rgb(93, 162, 207);
+}
+
+.login-page--scroll {
+    visibility: hidden;
+    position: absolute;
+    left: 73%;
+    opacity: 0;
+}
+.login-page--scroll-active {
+    transition: opacity 2s ease;
+    display: inline;
+    position: absolute;
+    left: 73%;
+    animation: login-page--scroll 3s infinite ease-in-out alternate;
+}
+
+@keyframes login-page--scroll {
+    from {
+        top: 52%
+    }
+
+    to {
+        top: 46%
+    }
+}
+
+.login-page--scroll-img {
+    width: 230px;
+}
+
+.login-page--scroll-text {
+    position: relative;
+    width: 140px;
+    transform: rotate(-5deg);
+
+    bottom: 165px;
+    left: 30px;
+
+    font-family: 'Caveat', cursive;
+    font-size: 14px;
+    color: rgb(77, 41, 0);
+    text-align: center;
+}
+
+.flying-area {
+    z-index: -2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.flying-ford {
+    position: absolute;
+    animation: fly 25s infinite ease;
+}
+
+.flying-ford--img {
+    width: 300px;
+}
+
+@keyframes fly {
+    from {
+        top: -30%;
+        left: 35%
+    }
+    10% {
+        top: 15%;
+        left: 75%
+    }
+    20% {
+        top: 40%;
+        left: 100%
+    }
+    to {
+        top: 40%;
+        left: 100%
+    }
+}
