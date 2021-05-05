@@ -42,7 +42,6 @@ class ScoreManagerBlock extends React.Component {
         if (this.state.RAMScoreCounter !== 0 && this.state.radioActive !== null) {
             this.props.changeHouseScore(this.state.radioActive, this.state.RAMScoreCounter);
             this.setState({ RAMScoreCounter: 0, radioActive: null }, this.spellAction);
-
         }
     }
 

@@ -1,9 +1,12 @@
 import React from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
 
 import LoginPage from '../Login-page/Login-page.js'
 import HouseBlockPage from '../House-block-page/House-block-page.js';
 import Header from '../Header/Header.js';
+import HistoryPage from '../History-page/History-page.js';
+import ForumPage from '../Forum-page/Forum-page.js'
 
 class App extends React.Component {
     constructor(props) {
@@ -16,7 +19,7 @@ class App extends React.Component {
                 Snegg: 'legilimens',
                 Test: '1234'
             },
-            Login: false,
+            Login: true,
             activeUser: null,
             housesScore: {
                 GryffindorPoints: 0,
@@ -61,20 +64,24 @@ class App extends React.Component {
     changeHouseScore = (house, points) => {
         switch (house) {
             case 'Gryffindor':
-                this.setState({ housesScore: { ...this.state.housesScore, GryffindorPoints: this.state.housesScore.GryffindorPoints + points } });
-                console.log(`Gryffindor gains ${points} points`);
+                this.setState({ housesScore: { ...this.state.housesScore, GryffindorPoints: this.state.housesScore.GryffindorPoints + points } }, () =>
+                    console.log(`Gryffindor gains ${points} points. Total: ${this.state.housesScore.GryffindorPoints}`)
+                );
                 break;
             case 'Slytherin':
-                this.setState({ housesScore: { ...this.state.housesScore, SlytherinPoints: this.state.housesScore.SlytherinPoints + points } });
-                console.log(`Slytherin gains ${points} points`);
+                this.setState({ housesScore: { ...this.state.housesScore, SlytherinPoints: this.state.housesScore.SlytherinPoints + points } }, () =>
+                    console.log(`Slytherin gains ${points} points. Total: ${this.state.housesScore.SlytherinPoints}`)
+                );
                 break;
             case 'Ravenclaw':
-                this.setState({ housesScore: { ...this.state.housesScore, RavenclawPoints: this.state.housesScore.RavenclawPoints + points } });
-                console.log(`Ravenclaw gains ${points} points`);
+                this.setState({ housesScore: { ...this.state.housesScore, RavenclawPoints: this.state.housesScore.RavenclawPoints + points } }, () =>
+                    console.log(`Ravenclaw gains ${points} points. Total: ${this.state.housesScore.RavenclawPoints}`)
+                );
                 break;
             case 'Hufflepuff':
-                this.setState({ housesScore: { ...this.state.housesScore, HufflepuffPoints: this.state.housesScore.HufflepuffPoints + points } });
-                console.log(`Huffelpuff gains ${points} points`);
+                this.setState({ housesScore: { ...this.state.housesScore, HufflepuffPoints: this.state.housesScore.HufflepuffPoints + points } }, () =>
+                    console.log(`Huffelpuff gains ${points} points. Total: ${this.state.housesScore.HufflepuffPoints}`)
+                );
                 break;
             default:
                 break;
@@ -84,11 +91,26 @@ class App extends React.Component {
     checkLogin = () => {
         if (this.state.Login) {
             return (<>
-                <Header />
-                <HouseBlockPage
-                    professor={this.state.activeUser}
-                    housesScore={this.state.housesScore}
-                    changeHouseScore={this.changeHouseScore} />
+                <BrowserRouter>
+                    <Header />
+                    <Route
+                        exact path='/'
+                        render={() =>
+                            <HouseBlockPage
+                                professor={this.state.activeUser}
+                                housesScore={this.state.housesScore}
+                                changeHouseScore={this.changeHouseScore} />} />
+                    <Route
+                        path='/history'
+                        render={() =>
+                            <HistoryPage />} />
+                    <Route
+                        path='/forum'
+                        render={() =>
+                            <ForumPage />} />
+
+                </BrowserRouter>
+
             </>)
         } else {
             return (<>

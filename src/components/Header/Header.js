@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom'
 import './Header.css';
 
 const Header = (props) => {
@@ -6,9 +7,9 @@ const Header = (props) => {
         <div className='header'>
             <h1>Система начисления баллов Хогвартс</h1>
             <div className='nav-bar'>
-                <div className='nav-bar--button'>Счетчик очков факультетов</div>
-                <div className='nav-bar--button'>Журнал внесения изменений</div>
-                <div className='nav-bar--button'>Доска сообщений для преподавателей</div>
+                <NavLink to='/' className='nav-bar--button'>Счетчик очков факультетов</NavLink>
+                <NavLink to='/history' className='nav-bar--button'>Журнал внесения изменений</NavLink>
+                <NavLink to='/forum' className='nav-bar--button'>Доска сообщений для преподавателей</NavLink>
             </div>
         </div>
     )
