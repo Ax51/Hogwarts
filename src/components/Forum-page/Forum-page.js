@@ -2,8 +2,10 @@ import React from 'react'
 
 const ForumPage = (props) => {
     return (
-        <div className='forum-page'>
-            <h1>Это доска обьявлений</h1>
+        <div className="main-page">
+            <div className='greetings-table'>
+                <h2>Это доска обьявлений</h2>
+            </div>
         </div>
     )
 }

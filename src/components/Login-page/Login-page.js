@@ -18,12 +18,10 @@ class LoginPage extends React.Component {
 
     onUserNameChange = (input) => {
         this.setState({ User: input.target.value })
-        console.log(this.state.User);
     }
 
     onPasswordNameChange = (input) => {
         this.setState({ Password: input.target.value })
-        console.log(this.state.Password);
     }
 
     onSubmit = (e) => {

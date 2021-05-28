@@ -31,6 +31,10 @@ class HouseBlockPage extends React.Component {
     //     this.houseBlockItemRender(newOrder)
     // }
 
+    houseBlockItemSort = () => {
+        console.log(this.props.housesScore);
+    }
+
     houseBlockItemRender = (houses) => houses.map((e) => {
         const { name, img, classNm } = e;
         let score;
@@ -61,11 +65,13 @@ class HouseBlockPage extends React.Component {
     })
 
     render() {
+        this.houseBlockItemSort()
         return (
             <div className='main-page'>
                 <div className='main-page--container'>
                     <div className='greetings-table'>
                         <h2>Приветствую Вас, профессор {this.props.professor}</h2>
+                        <h3>Сейчас лидирует {}</h3>
                     </div>
                     <div className='working-area'>
                         {this.houseBlockItemRender(this.state.houseBlockArr)}

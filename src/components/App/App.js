@@ -20,13 +20,14 @@ class App extends React.Component {
                 Test: '1234'
             },
             Login: true,
-            activeUser: null,
+            activeUser: 'Волан-де-морт',
             housesScore: {
                 GryffindorPoints: 0,
                 SlytherinPoints: 0,
                 RavenclawPoints: 0,
                 HufflepuffPoints: 0
-            }
+            },
+            historyScore: []
 
         }
     }
@@ -61,38 +62,44 @@ class App extends React.Component {
         }
     }
 
+    loggingOut = () => {
+        this.setState({Login: false})
+    }
+
     changeHouseScore = (house, points) => {
         switch (house) {
+            // Here we choose (via switch-case) Hogwarts House for changing their score, then (via setState #1) changes score & (via setState #2) adds a record for history page
             case 'Gryffindor':
                 this.setState({ housesScore: { ...this.state.housesScore, GryffindorPoints: this.state.housesScore.GryffindorPoints + points } }, () =>
-                    console.log(`Gryffindor gains ${points} points. Total: ${this.state.housesScore.GryffindorPoints}`)
+                    this.setState({ historyScore: [...this.state.historyScore, `Профессор ${this.state.activeUser} присуждает ${points} очков Гриффиндору. Всего у Гриффиндора ${this.state.housesScore.GryffindorPoints} очков`] })
                 );
                 break;
             case 'Slytherin':
                 this.setState({ housesScore: { ...this.state.housesScore, SlytherinPoints: this.state.housesScore.SlytherinPoints + points } }, () =>
-                    console.log(`Slytherin gains ${points} points. Total: ${this.state.housesScore.SlytherinPoints}`)
+                    this.setState({ historyScore: [...this.state.historyScore, `Профессор ${this.state.activeUser} присуждает ${points} очков Слизерину. Всего у Слизерина ${this.state.housesScore.SlytherinPoints} очков`] })
                 );
                 break;
             case 'Ravenclaw':
                 this.setState({ housesScore: { ...this.state.housesScore, RavenclawPoints: this.state.housesScore.RavenclawPoints + points } }, () =>
-                    console.log(`Ravenclaw gains ${points} points. Total: ${this.state.housesScore.RavenclawPoints}`)
+                    this.setState({ historyScore: [...this.state.historyScore, `Профессор ${this.state.activeUser} присуждает ${points} очков Когтеврану. Всего у Когтеврана ${this.state.housesScore.RavenclawPoints} очков`] })
                 );
                 break;
             case 'Hufflepuff':
                 this.setState({ housesScore: { ...this.state.housesScore, HufflepuffPoints: this.state.housesScore.HufflepuffPoints + points } }, () =>
-                    console.log(`Huffelpuff gains ${points} points. Total: ${this.state.housesScore.HufflepuffPoints}`)
+                    this.setState({ historyScore: [...this.state.historyScore, `Профессор ${this.state.activeUser} присуждает ${points} очков Пуффендую. Всего у Пуффендуя ${this.state.housesScore.HufflepuffPoints} очков`] })
                 );
                 break;
             default:
                 break;
-        }
+        };
     }
 
     checkLogin = () => {
         if (this.state.Login) {
             return (<>
                 <BrowserRouter>
-                    <Header />
+                    <Header 
+                    loggingOut={this.loggingOut}/>
                     <Route
                         exact path='/'
                         render={() =>
@@ -103,7 +110,8 @@ class App extends React.Component {
                     <Route
                         path='/history'
                         render={() =>
-                            <HistoryPage />} />
+                            <HistoryPage 
+                                history={this.state.historyScore}/>} />
                     <Route
                         path='/forum'
                         render={() =>
