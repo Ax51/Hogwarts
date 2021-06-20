@@ -31,8 +31,50 @@ class HouseBlockPage extends React.Component {
     //     this.houseBlockItemRender(newOrder)
     // }
 
-    houseBlockItemSort = () => {
-        console.log(this.props.housesScore);
+    leaderFinder = () => {
+        let sortableArr = [];
+        for (let house in this.props.housesScore) {
+            sortableArr.push([house, this.props.housesScore[house]])
+        };
+        sortableArr.sort((a, b) => b[1] - a[1]);
+        let leader;
+        switch (sortableArr[0][0]) {
+            case 'GryffindorPoints':
+                leader = 'Гриффиндор';
+                break;
+            case 'SlytherinPoints':
+                leader = 'Слизерин';
+                break;
+            case 'RavenclawPoints':
+                leader = 'Когтевран';
+                break;
+            case 'HufflepuffPoints':
+                leader = 'Пуффендуй';
+                break;
+            default:
+                break;
+        }
+        let correctSpelling;
+        let noLeader;
+        let newbeArr = [];
+        sortableArr.map((e) => newbeArr.push(e[1]))
+
+        if (sortableArr[0][1] === 0 && sortableArr[1][1] === 0 && sortableArr[2][1] === 0 && sortableArr[3][1] === 0) {
+            noLeader = true;
+        } else if (sortableArr[0][1] === sortableArr[1][1] || sortableArr[0][1] === sortableArr[2][1] || sortableArr[0][1] === sortableArr[3][1]) {
+            noLeader = true;
+        } else {
+            noLeader = false;
+        }
+
+        if (noLeader) {
+            correctSpelling = 'Сейчас никто не лидирует';
+        } else {
+            correctSpelling = `Сейчас лидирует ${leader}`
+        }
+        return (
+            correctSpelling
+        )
     }
 
     houseBlockItemRender = (houses) => houses.map((e) => {
@@ -65,13 +107,12 @@ class HouseBlockPage extends React.Component {
     })
 
     render() {
-        this.houseBlockItemSort()
         return (
             <div className='main-page'>
                 <div className='main-page--container'>
                     <div className='greetings-table'>
                         <h2>Приветствую Вас, профессор {this.props.professor}</h2>
-                        <h3>Сейчас лидирует {}</h3>
+                        <h3>{this.leaderFinder()}</h3>
                     </div>
                     <div className='working-area'>
                         {this.houseBlockItemRender(this.state.houseBlockArr)}

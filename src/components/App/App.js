@@ -116,9 +116,7 @@ class App extends React.Component {
                         path='/forum'
                         render={() =>
                             <ForumPage />} />
-
                 </BrowserRouter>
-
             </>)
         } else {
             return (<>
